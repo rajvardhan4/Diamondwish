@@ -4,7 +4,7 @@ import { context } from "../context/ContextProvider";
 
 const ProductCard = () => {
 
-  const {products,selectedColors,hoveredProductId,handleColorChange,wishList,toggleHeart} = useContext(context)
+  const {products,selectedColors,hoveredProductId,handleColorChange,wishList,toggleHeart,setHoveredProductId} = useContext(context)
 
 
     
