@@ -293,7 +293,7 @@ export function Provider({children}){
   
   return(
     <>
-    <context.Provider value={{products,selectedColors,hoveredProductId,handleColorChange,wishList,toggleHeart}}>
+    <context.Provider value={{products,selectedColors,hoveredProductId,handleColorChange,wishList,toggleHeart,setHoveredProductId}}>
       {children}
     </context.Provider>
     </>

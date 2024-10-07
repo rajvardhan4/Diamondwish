@@ -1,36 +1,13 @@
-import React, { useState , useContext } from "react";
+import React, { useContext } from "react";
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import { context } from "../context/ContextProvider";
 
 const ProductCard = () => {
 
-  const {products} = useContext(context)
-  const [hoveredProductId, setHoveredProductId] = useState(null);
-  const [wishList, setWishList] = useState({});
-  
-  const [selectedColors, setSelectedColors] = useState({
-    1: "whiteGold",
-    2: "platinum",
-    3: "yellowGold",
-    4: "whiteGold",
-    5: "roseGold",
-    6: "yellowGold",
-    7: "whiteGold",
-    8: "yellowGold",
-  })
-  const handleColorChange = (productId, color) => {
-    setSelectedColors((prev) => ({ ...prev, [productId]: color }));
-  };
-
-  const toggleHeart = (productId) => {
-    setWishList((prev) => ({
-      ...prev,
-      [productId]: !prev[productId],
-    }));
-    // alert("Add To Wishlist")
-  };
+  const {products,selectedColors,hoveredProductId,handleColorChange,wishList,toggleHeart} = useContext(context)
 
 
+    
 
 
     return (
@@ -89,7 +66,7 @@ const ProductCard = () => {
                   return (
                     <button
                       key={color}
-                      className={`w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-[2px] ${selectedColors[product.id] === color
+                      className={`w-7 h-7 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-[2px] ${selectedColors[product.id] === color
                           ? "border-[black]"
                           : "border-white"
                         }`}
