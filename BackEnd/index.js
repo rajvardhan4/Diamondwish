@@ -5,13 +5,7 @@ import mongodb from './db.js'
 
 
 const app=express();
-app.use(cors(
-  {
-    origin: ["https://diamondwish-frontend.vercel.app/"],
-    methods: ["POST", "GET"],
-    credentials: true
-  }
-))
+app.use(cors())
 dotenv.config()
 const PORT=4000;
 
