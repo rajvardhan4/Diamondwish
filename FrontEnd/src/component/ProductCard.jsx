@@ -51,37 +51,36 @@ const ProductCard = () => {
 
             {/* Color Options */}
             <div className="flex space-x-1 sm:space-x-2 justify-center py-1 sm:py-2">
-            {Object.keys(product.colorOptions).map((color) => {
-  const backgroundImages = {
-    whiteGold:
-      "https://images.diamondwish.com/uploads/images/metals/1694168609_white-gold.svg",
-    yellowGold:
-      "https://images.diamondwish.com/uploads/images/metals/1694168678_yellow-gold.svg",
-    roseGold:
-      "https://images.diamondwish.com/uploads/images/metals/1694168588_rose-gold.svg",
-    platinum:
-      "https://images.diamondwish.com/uploads/images/metals/1694168487_platinum.svg",
-  };
+              {Object.keys(product.colorOptions).map((color) => {
+                const backgroundImages = {
+                  whiteGold:
+                    "https://images.diamondwish.com/uploads/images/metals/1694168609_white-gold.svg",
+                  yellowGold:
+                    "https://images.diamondwish.com/uploads/images/metals/1694168678_yellow-gold.svg",
+                  roseGold:
+                    "https://images.diamondwish.com/uploads/images/metals/1694168588_rose-gold.svg",
+                  platinum:
+                    "https://images.diamondwish.com/uploads/images/metals/1694168487_platinum.svg",
+                };
 
-  return (
-    <div className="flex space-x-1 sm:space-x-2 justify-center py-1 sm:py-2" key={color}>
-      <button
-        key={color}
-        className={`w-7 h-7 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-[2px] ${
-          selectedColors[product.id] === color
-            ? "border-black"
-            : "border-white"
-        }`}
-        style={{
-          backgroundImage: `url(${backgroundImages[color]})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        onClick={() => handleColorChange(product.id, color)}
-      ></button>
-    </div>
-  );
-})}
+                return (
+                  <div className="flex space-x-1 sm:space-x-2 justify-center py-1 sm:py-2" key={color}>
+                    <button
+                      key={color}
+                      className={`w-7 h-7 sm:w-5 sm:h-5 md:w-6 md:h-6 rounded-full border-[2px] ${selectedColors[product.id] === color
+                          ? "border-black"
+                          : "border-white"
+                        }`}
+                      style={{
+                        backgroundImage: `url(${backgroundImages[color]})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                      onClick={() => handleColorChange(product.id, color)}
+                    ></button>
+                  </div>
+                );
+              })}
 
             </div>
 
