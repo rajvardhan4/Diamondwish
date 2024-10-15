@@ -8,7 +8,6 @@ export function Provider({ children }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [wishList, setWishList] = useState({});
-  const [selectedColors, setSelectedColors] = useState({});
   const [hoveredProductId, setHoveredProductId] = useState(null);
 
   useEffect(() => {
@@ -40,6 +39,17 @@ export function Provider({ children }) {
       [productId]: color,
     }));
   };
+
+  const [selectedColors, setSelectedColors] = useState({
+    1: "whiteGold",
+    2: "platinum",
+    3: "yellowGold",
+    4: "whiteGold",
+    5: "roseGold",
+    6: "yellowGold",
+    7: "whiteGold",
+    8: "yellowGold",
+  });
 
   return (
     <context.Provider
