@@ -108,7 +108,7 @@ export default function Navbar() {
             WEDDING RINGS
           </li>
           <li className="cursor-pointer text-gray-600 font-[500] hover:text-gray-500">
-            DIAMONDS
+            DIAMOND
           </li>
           <li className="cursor-pointer text-gray-600 font-[500] hover:text-gray-500">
             GEMSTONES
