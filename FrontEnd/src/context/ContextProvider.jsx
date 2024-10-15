@@ -14,7 +14,7 @@ export function Provider({ children }) {
   useEffect(() => {
     // Fetch data using Axios
     axios
-      .get("http://localhost:4000/DiamondwishData")
+      .get("https://diamondwish-backend.vercel.app/DiamondwishData")
       .then((response) => {
         setProducts(response.data);
         setLoading(false); // Loading complete
