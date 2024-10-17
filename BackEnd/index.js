@@ -29,31 +29,34 @@ db.connect((err) => {
   console.log('Connected to the database');
 });
 
-// API endpoint to fetch product and color options data
-app.get('/api/products', (req, res) => {
-  const productQuery = 'SELECT * FROM product';
-  const colorOptionsQuery = 'SELECT * FROM color_options';
+// API endpoint to fetch product by ID
+app.get('/api/products/:id', (req, res) => {
+  const productId = req.params.id;  // Get the ID from the request URL
 
-  db.query(productQuery, (err, productResults) => {
+  // SQL query to fetch the specific product by ID
+  const productQuery = 'SELECT * FROM product WHERE id = ?';
+
+  // Fetch the product by ID
+  db.query(productQuery, [productId], (err, productResults) => {
     if (err) {
       res.status(500).json({ message: 'Error fetching product data' });
       return;
     }
 
-    db.query(colorOptionsQuery, (err, colorResults) => {
-      if (err) {
-        res.status(500).json({ message: 'Error fetching color options data' });
-      } else {
-        // Combine the product and color options results
-        res.json({
-          products: productResults,
-          colorOptions: colorResults
-        });
-      }
+    // Check if the product was found
+    if (productResults.length === 0) {
+      res.status(404).json({ message: 'Product not found' });
+      return;
+    }
+
+    // Return the product details
+    res.json({
+      product: productResults[0]  // Return the specific product
     });
   });
 });
 
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on PORT ${PORT}`);
 });
