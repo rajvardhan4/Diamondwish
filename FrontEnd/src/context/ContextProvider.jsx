@@ -5,41 +5,8 @@ import axios from "axios"
 export const context = React.createContext();
 
 export function Provider({ children }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [wishList, setWishList] = useState({});
-  const [hoveredProductId, setHoveredProductId] = useState(null);
-
-  useEffect(() => {
-    // Fetch data using Axios
-    axios
-      .get("http://localhost:4000/DiamondwishData")
-      .then((response) => {
-        setProducts(response.data);
-        setLoading(false); // Loading complete
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setLoading(false); // Stop loading on error
-      });
-  }, []);
-
-  // Toggle heart/wishlist status for a product
-  const toggleHeart = (productId) => {
-    setWishList((prevWishList) => ({
-      ...prevWishList,
-      [productId]: !prevWishList[productId],
-    }));
-  };
-
-  // Handle color change
-  const handleColorChange = (productId, color) => {
-    setSelectedColors((prevColors) => ({
-      ...prevColors,
-      [productId]: color,
-    }));
-  };
-
+ 
+  const [productData, setProductData] = useState([]);
   const [selectedColors, setSelectedColors] = useState({
     1: "whiteGold",
     2: "platinum",
@@ -50,20 +17,66 @@ export function Provider({ children }) {
     7: "whiteGold",
     8: "yellowGold",
   });
+  const [hoveredProductId, setHoveredProductId] = useState(null); // To track hovered product
+  const [wishList, setWishList] = useState({});
+
+  useEffect(() => {
+    // Fetch product data from API
+    fetch('http://localhost:4000/api/products')
+      .then((response) => response.json())
+      .then((data) => {
+        setProductData(data.products); // Set the product data
+        console.log('Fetched Product Data:', data); // Print the fetched data to the console
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+    // Function to handle color change
+    const handleColorChange = (color, productId) => {
+      setSelectedColors((prevState) => ({
+        ...prevState,
+        [productId]: color, // Change the selected color for the specific product
+      }));
+    };
+  
+    // Function to handle hover on product image
+    const handleProductHover = (id) => {
+      setHoveredProductId(id); // Set the hovered product
+    };
+
+
+      // Object containing background images for each color option
+  const backgroundImages = {
+    whiteGold:
+      "https://images.diamondwish.com/uploads/images/metals/1694168609_white-gold.svg",
+    yellowGold:
+      "https://images.diamondwish.com/uploads/images/metals/1694168678_yellow-gold.svg",
+    roseGold:
+      "https://images.diamondwish.com/uploads/images/metals/1694168588_rose-gold.svg",
+    platinum:
+      "https://images.diamondwish.com/uploads/images/metals/1694168487_platinum.svg",
+  };
+  // Toggle heart/wishlist status for a product
+  const toggleHeart = (productId) => {
+    setWishList((prevWishList) => ({
+      ...prevWishList,
+      [productId]: !prevWishList[productId],
+    }));
+  };
+
 
   return (
     <context.Provider
       value={{
-        products,
-        selectedColors,
-        hoveredProductId,
+        productData,
+        setProductData,
         handleColorChange,
-        wishList,
-        toggleHeart,
-        setHoveredProductId,
+        handleProductHover,selectedColors,hoveredProductId,wishList,backgroundImages,toggleHeart
       }}
     >
-      {loading ? <div>Loading...</div> : children}
+      {children}
     </context.Provider>
   );
 }
