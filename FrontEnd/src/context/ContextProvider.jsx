@@ -21,7 +21,7 @@ export function Provider({ children }) {
   const [wishList, setWishList] = useState({});
 
   useEffect(() => {
-    // Fetch product data from API
+    // Fetch product data from API``
     fetch('http://localhost:4000/api/products')
       .then((response) => response.json())
       .then((data) => {

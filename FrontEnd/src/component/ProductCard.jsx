@@ -9,7 +9,6 @@ const ProductCard = () => {
 
     const {
            productData,
- setProductData,
  handleColorChange,
  handleProductHover,selectedColors,hoveredProductId,wishList,backgroundImages,toggleHeart
    } = useContext(context);
